@@ -21,7 +21,7 @@ function Header(){
                  setname(data[0] + ' / ' + data[1]);
                 }
          catch(e){
-                 alert("Errrrrrrrrrrrrrrrrrrrrrrrrrrrr");
+                 alert("Errrrrrrrrrrrrrrrrrrrrrrrirrrrr");
                 }
     }
 
