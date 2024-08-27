@@ -1,0 +1,75 @@
+:root{
+  --PrimaryColor: #00BFFF;
+  --SecondaryColor: #32CD32;
+  --AccentColor: #A9A9A9;
+  --HighlightColor: #FF7F50;
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.App{
+  width: 100%;
+  margin-top: 12vh;
+}
+
+
+/* Start Home Page !!!!!!!!!!!!!!!!! */
+
+.Home-page{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.Group-sec{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 2%;
+  /* gap: 20px; */
+}
+.Group{
+  border: 2px solid black;
+  width: 45%;
+}
+.Group-row{
+  display: flex;
+  justify-content: space-around;
+}
+.Group-row div{
+  border: 1px solid black;
+  flex: 1;
+  text-align: center;
+}
+.Group-row div.name{
+  flex-grow: 2;
+}
+.show-data{
+  border: 2px solid red;
+}
+.show-data main{
+  border: 2px solid black;
+  display: flex;
+  justify-content: space-around;
+}
+.show-data main .left-team,.right-team,.setting{
+  display: flex;
+}
+.knockout-sec{
+  border: 2px solid red;
+}
+.quarter-final .QF1,.QF2,.QF3,.QF4{
+  display: flex;
+}
+.Semi-final .LSF,.RSF{
+  display: flex;
+}
+.final .F{
+display: flex;
+}
+
+/* End Home Page !!!!!!!!!!!!!!!!!!! */

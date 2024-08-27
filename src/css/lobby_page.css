@@ -1,0 +1,165 @@
+:root {
+    --primaryTheme-strongCyan: hsl(172, 67%, 45%);
+    
+    /* Neutral */
+    --Verydarkcyan: hsl(183, 100%, 15%);
+    --Darkgrayishcyan: hsl(186, 14%, 43%);
+    --Grayishcyan: hsl(184, 14%, 56%);
+    --Lightgrayishcyan: hsl(185, 41%, 84%);
+    --Verylightgrayishcyan: hsl(189, 41%, 97%);
+    --White: hsl(178, 100%, 90%);
+    
+    /* Font */
+    --family: monospace;
+    --inputFontSize: 24px;
+    --weight: 700;
+}
+
+ .lobby {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    background-color: var(--Verydarkcyan);
+    /* font-family: var(--family); */
+    color: var(--White);
+    padding: 2%;
+    box-sizing: border-box;
+}
+
+.holder {
+    background-color: var(--Darkgrayishcyan);
+    border-radius: 15px;
+    padding: 2%;
+    margin-top: 20px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);
+    max-width: 60%;
+    width: 100%;
+    animation: fadeIn 1s ease-in-out;
+    margin: 5% 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.team-card {
+    background-color: var(--Grayishcyan);
+    width: 90%;
+    margin: 2% 0;
+    padding: 15px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    font-size: var(--inputFontSize);
+    font-weight: var(--weight);
+    transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+.team-card:hover {
+    background-color: var(--primaryTheme-strongCyan);
+    transform: translateY(-10px);
+    color: var(--White);
+}
+
+.toggle-button {
+    background-color: var(--primaryTheme-strongCyan);
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    color: var(--White);
+    font-size: 1rem;
+    cursor: pointer;
+    margin-bottom: 10px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.toggle-button:hover {
+    background-color: var(--Verydarkcyan);
+}
+
+.team-info {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    opacity: 0;
+    animation: fadeIn 0.5s forwards;
+}
+
+.team-info .player {
+    flex: 1;
+    text-align: center;
+    padding: 0 10px;
+}
+
+.team-info .separator {
+    width: 10%;
+    font-size: 1.5rem;
+    font-weight: var(--weight);
+    color: var(--Verydarkcyan);
+}
+
+.team-status {
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+}
+
+.status-indicator {
+    width: 10px;
+    height: 10px;
+    background-color: var(--primaryTheme-strongCyan);
+    border-radius: 50%;
+    margin-right: 10px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.status-text {
+    color: var(--White);
+}
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+
+
+/* For Phones */
+
+@media (max-width: 481px) {
+
+    .team-card{
+        margin: 5%;
+    }
+
+    .team-info .player{
+        font-size: 70%;
+    }
+
+    .holder{
+        max-width: 85%;
+    }
+
+    .lobby{
+        margin-top: -15px;
+    }
+}
+
+
+/* For wide phones */
+
+@media (min-width: 482px) and (max-width: 1100px) {
+
+}
