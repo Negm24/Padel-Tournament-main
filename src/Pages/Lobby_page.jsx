@@ -54,8 +54,8 @@ function Lobby() {
         <div className="lobby">
             <Header />
 
-            <h1>
-                Lobby
+            <h1 id="Title">
+                L o b b y
             </h1>
 
             <div className="holder">
