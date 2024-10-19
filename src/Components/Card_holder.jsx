@@ -1,28 +1,25 @@
 import React, { useState, useCallback } from "react";
 import SignupCard from "./Signup_card";
 import LoginCard from "./Login_card";
-import '../css/auth_page.css';
-import { CSSTransition, SwitchTransition } from 'react-transition-group';
 
-function Card_holder() {
-    const [isLogin, setIsLogin] = useState(true);
+function CardHolder() {
+    const [Switch, setSwitch] = useState('login');
 
-    const switchCards = useCallback(() => {
-        setIsLogin(prev => !prev);
+    const switchCards = useCallback((s) => {
+        setSwitch(s);
     }, []);
 
     return (
         <div className="card-holder">
-            <SwitchTransition mode="out-in">
-                <CSSTransition key={isLogin ? "login" : "signup"} classNames="fade" timeout={300}>
-                    {isLogin ? <LoginCard /> : <SignupCard />}
-                </CSSTransition>
-            </SwitchTransition>
-            <button id="CA-AHAC-Btn" onClick={switchCards}>
-                {isLogin ? "Create Account" : "Already Have an Account"}
-            </button>
+            <div className="selectors">
+                <span onClick={() => switchCards('sign')} style={{borderBottom : Switch === 'login' ? 'none' : '3px solid #5f8dff' }}>Sign-up</span>
+                <span onClick={() => switchCards('login')} style={{borderBottom : Switch !== 'login' ? 'none' : '3px solid #5f8dff' }}>Log-in</span>
+            </div>
+            <div className="sub-holder">
+                {Switch === 'login' ? <LoginCard /> : <SignupCard />}
+            </div>
         </div>
     );
 }
 
-export default Card_holder;
+export default CardHolder;

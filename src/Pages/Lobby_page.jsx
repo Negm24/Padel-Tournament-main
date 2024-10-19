@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
+import Header from "../Components/Header";
 import '../css/lobby_page.css';
-import Header from '../Components/Header';
-import Footer from '../Components/Footer';
 
 function Lobby() {
     const [data, setData] = useState([]);
 
     const GetData = async () => {
         try {
-            const response = await fetch('http://127.0.0.1:5000/GetData');
+            const response = await fetch('http://51.20.32.239:5000/GetData');
             const players = await response.json(); // Parse the response as JSON
 
             setData(players);
@@ -22,67 +21,43 @@ function Lobby() {
     }, []);
 
 
-
-
-    // const [username1, setusername1] = useState(null);
-    // const [username2, setusername2] = useState(null);
-
-    // useEffect(
-    //  () => {GetUserName()}
-    // ,[]);
-
-    // const GetUserName = async() => {
-    //     try{
-    //          const response = await fetch('http://127.0.0.1:5000/WhoCurrent');
-    //         if (!response.ok) {
-    //            alert('Network response was not ok');
-    //             }
-    //             const currentuser = await response.json();
-    //              setusername1(currentuser[0]);
-    //              setusername2(currentuser[1]);
-    //             }
-    //      catch(e){
-    //              alert("Errrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
-    //             }
-    // }
-
-    // const isCurrentUser = (player) => {
-    //     return player[12] === 'YES';
-    // };
-
     return (
+        <>
+        <Header />
         <div className="lobby">
-            <Header />
-
-            <h1 id="Title">
-                L o b b y
-            </h1>
-
             <div className="holder">
-                {data.map((player, index) => ( // Add player as a parameter
-                    <div className="team-card" key={index}
-                    style={{
-                        backgroundColor: index == 3 ? 'var(--primaryTheme-strongCyan)' : 'transparent', // Call function isCurrentUser(player)
-                        boxShadow: index == 3 ? '0px 0px 15px var(--primaryTheme-strongCyan) ' : 'transparent'
-                    }}> <div>{index + 1}</div>
-                        <div className="team-info">
-                            <div className="player">{player[1]}</div>
-                            {/* <div className="player">Example</div> */}
-                            <div className="separator">&</div>
-                            {/* <div className="player">Example</div> */}
-                            <div className="player">{player[2]}</div>
+                <div className="data">
+                    {data.map((player, index) => ( //Change to data.map(player, index)
+                        <div key={index} style={{backgroundColor: player[4] == "YES" ? '#55aaff' : '#fff',
+                            color: player[4] == "YES" ? 'white' : 'black',
+                            borderRadius: '5px'
+                        }}>
+                            <span>{"Team " + ++index}</span>
+                            <span> {player[1] + " & " + player[2]} </span>
+                            {/* <span>{index}</span> */}
                         </div>
-
-                        <div className="team-status">
-                            <span className="status-indicator"></span>
-                            <span className="status-text">Waiting</span>
+                    ))}
+                </div>
+                <div className="emoji">
+                    <span className="title">
+                        The Tournament will start in 1/12/2024  9:00 PM
+                    </span>
+                    <div className="lucky">
+                        <div className="notes">
+                            <span>PLEASE READ THE RULES</span>
+                            <button>Book of Rules</button>
+                        </div>
+                        <div className="ball">
+                            <div></div>
                         </div>
                     </div>
-                ))}
+                </div>
             </div>
-
-            <Footer />
         </div>
+
+        <div>
+        </div>
+        </>
     );
 }
 

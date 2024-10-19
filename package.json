@@ -1,10 +1,9 @@
 {
-  "homepage": "https://negm24.github.io/Padel-Tournament-main/",
+  "homepage": ".",
   "name": "my-app",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^6.6.0",
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
     "@fortawesome/free-solid-svg-icons": "^6.5.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
@@ -17,17 +16,15 @@
     "react-bootstrap": "^2.10.4",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.24.1",
-    "react-scripts": "^5.0.1",
-    "react-transition-group": "^4.4.5",
+    "react-scripts": "^3.0.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "set-ssl": "set NODE_OPTIONS=--openssl-legacy-provider && react-scripts start"
   },
   "eslintConfig": {
     "extends": [

@@ -1,23 +1,18 @@
 import React, { useState, useCallback } from "react";
 import { useNavigate } from 'react-router-dom';
-import '../css/auth_page.css';
 
 function Login_card() {
     const [Teamid, setTeamid] = useState('');
     const [Passcode, setPasscode] = useState('');
     const navigate = useNavigate();
 
-    const [error, setError] = useState(null); //Added...
-
     const WhereTo = useCallback(async () => {
         try {
-            const response = await fetch('http://127.0.0.1:5000/WhereTo');
-            const data = await response.json(); // Assuming the backend returns JSON
+            const response = await fetch('http://51.20.32.239:5000/WhereTo');
+            const data = await response.json();
             if (data.message === 'Lobby') {
-                
                 navigate('/Lobby');
             } else {
-                alert(data.message)
                 navigate('/Home');
             }
         } catch (error) {
@@ -25,28 +20,14 @@ function Login_card() {
         }
     }, [navigate]);
 
-    const isFieldEmpty = () => { //Negm added this function to detect if any input field isEmpty after the user attempted to submit the form...
-        return Teamid === '' || Passcode === '';
-    };
-
-    const _isFieldEmpty = isFieldEmpty(); //Negm called this function mentioned above...
-    
-    const handlelogin = useCallback(async (event) => {
-
-        event.preventDefault(); //Negm added this line + the parameter (event)...
-
-        if (_isFieldEmpty){ // Alert and exit function
-            alert("All inputs are required!");
-            return;
-        }
-        
+    const handlelogin = useCallback(async () => {
         const newUser = {
             Teamid,
             Passcode,
         };
 
         try {
-            const response = await fetch('http://127.0.0.1:5000/ValidateUser', {
+            const response = await fetch('http://51.20.32.239:5000/ValidateUser', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -54,50 +35,39 @@ function Login_card() {
                 body: JSON.stringify(newUser)
             });
 
-            if (response.status == 401) {
-                setError('Unauthorized: Incorrect ID or Password!');
-                return;
-            }
-            else if (!response.ok){
+            if (!response.ok) {
                 console.error('Error validating user');
-                setError('An error occurred. Please try again.');
                 return;
             }
 
-            const data = await response.json();
+            const data = await response.json(); // Use response.json() if the backend returns JSON
             console.log('Login successful:', data);
             WhereTo();
         } catch (error) {
             console.error('Error validating user:', error);
-            setError('An error occurred. Please try again.');
         }
     }, [Teamid, Passcode, WhereTo]);
 
     return (
-        //Negm wrapped the input fields and the button inside the form element to ensure that the inputs are required and triggered by the submit button or just by pressing Enter (Login)...
-        <form onSubmit={handlelogin}>
-            <div className="login-card">
-                <h1>Login</h1>
-                <input
-                    required
-                    type="number" 
+        <div className="login-card">
+            <div className="holder">
+                <input 
+                    type="text" 
                     placeholder="Team-ID" 
                     value={Teamid} 
-                    onChange={(e) => setTeamid(e.target.value)}
+                    onChange={(e) => setTeamid(e.target.value)} 
                 />
-                <input
-                    required
-                    type="password" 
+                <input 
+                    type="password"
                     placeholder="Password" 
                     value={Passcode} 
                     onChange={(e) => setPasscode(e.target.value)} 
                 />
-                
-                {error && <p className="error-message">{error}</p>}
-                
-                <button type="submit" onClick={handlelogin}>Login</button>
             </div>
-        </form>
+            <div className="button">
+                <button onClick={handlelogin}>Login</button>
+            </div>
+        </div>
     );
 }
 

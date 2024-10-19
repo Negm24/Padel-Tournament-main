@@ -1,3 +1,5 @@
+# set NODE_OPTIONS=--openssl-legacy-provider
+
 from flask import Flask, request, jsonify
 import mysql.connector
 from mysql.connector import Error
@@ -10,10 +12,10 @@ app = Flask(__name__)
 CORS(app)
 
 db_config = {
-    'host': '127.0.0.1',
-    'database': 'padeltournament',
-    'user': 'negm',
-    'password': 'Yoyoqls_2005'
+    'host': '51.20.32.239',
+    'database': 'sparx_schema',
+    'user': 'Dalatony_MYSQL',
+    'password': 'Elsharkawy(2005)'
 }
 
 def get_db_connection():
@@ -277,12 +279,7 @@ def get_data():
             row_list[1] = username1 if username1 else row_list[1]
             username2 = search_player(row_list[2])
             row_list[2] = username2 if username2 else row_list[2]
-
-            current = search_player(row_list[12])
-            row_list[12] = current if current else row_list[12]
-
             modified_data.append(row_list)
-
         cursor.close()
         connection.close()
 
@@ -998,35 +995,25 @@ def show_final_qualifiers():
         print(f"Database connection error: {e}")
         return jsonify({'error': 'Database connection failed'}), 500
 
-@app.route('/WhereTo', methods=['GET'])
+@app.route('/WhereTo', methods=['GET']) 
 def WhereTo():
     try:
         connection = get_db_connection()
         cursor = connection.cursor()
         try:
-            sql = 'SELECT setting_stage FROM setting'
+            sql = 'SELECT setting_stage From setting '
             cursor.execute(sql)
-            result = cursor.fetchone()
-            
-            # Check if result is not None and extract the setting_stage
-            if result:
-                setting_stage = result[0]  # Fetch the first column value
-                print(f"Setting stage: {setting_stage}")  # Print the setting stage
-                
-                if setting_stage == 'Lobby':
-                    return jsonify({'message': 'Lobby'}), 200
-                else:
-                    return jsonify({'message': 'game'}), 200
+            setting_stage = cursor.fetchone()
+            if setting_stage == 'Lobby':
+                return jsonify({'message': 'Lobby'}), 200
             else:
-                return jsonify({'error': 'No settings found'}), 404
-                
+                return jsonify({'message': 'game'}), 200
         except Exception as e:
-            print(f"Failure during query execution: {e}")
-            return jsonify({'error': 'An error occurred while fetching data'}), 500
+            print(f"Failure: {e}")
+            return jsonify({'error': 'An error occurred while fetching '}), 500
     except Exception as e:
-        print(f"Failure while connecting to the database: {e}")
-        return jsonify({'error': 'An error occurred while connecting to the database'}), 500
-
+            print(f"Failure: {e}")
+            return jsonify({'error': 'An error occurred while fetching'}), 500
 
 @app.route('/CheckSettingQuarter', methods=['GET']) 
 def check_setting_quarter():
@@ -1157,4 +1144,4 @@ def Winnner():
 
 
 if __name__ == '__main__':
-    app.run(debug=True , port=5000)
+    app.run(debug=True,host='0.0.0.0' , port=5000)
